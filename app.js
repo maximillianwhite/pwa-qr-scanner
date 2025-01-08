@@ -8,6 +8,12 @@ fetch("codes.json") // Replace with your URL if hosted externally
         document.getElementById("status").innerText = "❌ Failed to load codes.";
     });
 
+
+    console.log("Html5QrcodeScanner:", typeof Html5QrcodeScanner);
+
+
+
+
 // QR code scanning logic
 function onScanSuccess(decodedText) {
     document.getElementById("result").innerText = decodedText;
