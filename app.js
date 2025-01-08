@@ -3,11 +3,20 @@ let codes = [];
 fetch("codes.json") // Replace with your URL if hosted externally
     .then(response => response.json())
     .then(data => codes = data)
-    .catch(error => console.error("Error loading codes:", error));
+    .catch(error => {
+        console.error("Error loading codes:", error);
+        document.getElementById("status").innerText = "❌ Failed to load codes.";
+    });
 
 // QR code scanning logic
 function onScanSuccess(decodedText) {
     document.getElementById("result").innerText = decodedText;
+
+    // Validate the scanned code
+    if (!decodedText || decodedText.trim() === "") {
+        document.getElementById("status").innerText = "❌ Invalid QR code.";
+        return;
+    }
 
     // Compare scanned code with the list
     if (codes.includes(decodedText)) {
