@@ -27,8 +27,13 @@ function onScanSuccess(decodedText) {
     // Compare scanned code with the list
     if (codes.includes(decodedText)) {
         document.getElementById("status").innerText = "✅ Code is valid!";
+        alert(`Scanned QR YEP`);
     } else {
         document.getElementById("status").innerText = "❌ Code is not valid!";
+        alert(`Scanned QR NOPE`);
+        html5QrcodeScanner.clear(); // This stops the scanning session
+
+
     }
 }
 
