@@ -1,6 +1,6 @@
-// Load the list of valid codes from a JSON file (hosted online or locally)
+// Load the list of valid codes
 let codes = [];
-fetch("codes.json") // Replace with your URL if hosted externally
+fetch("codes.json")
     .then(response => response.json())
     .then(data => codes = data)
     .catch(error => {
@@ -8,39 +8,45 @@ fetch("codes.json") // Replace with your URL if hosted externally
         document.getElementById("status").innerText = "❌ Failed to load codes.";
     });
 
+const html5QrCode = new Html5Qrcode("reader");
 
+// Start the scanner
+function startScanner() {
+    document.body.style.backgroundColor = "white";
 
+    html5QrCode.start(
+        { facingMode: "environment" }, // Rear camera if available
+        { fps: 10, qrbox: 250 },
+        (decodedText) => {
+            console.log("QR Code Scanned:", decodedText);
 
-
-
-// QR code scanning logic
-function onScanSuccess(decodedText) {
-    document.getElementById("result").innerText = decodedText;
-
-    // Validate the scanned code
-    if (!decodedText || decodedText.trim() === "") {
-        document.getElementById("status").innerText = "❌ Invalid QR code.";
-        alert(`Scanned QR Code: ${decodedText}`);
-        return;
-    }
-
-    // Compare scanned code with the list
-    if (codes.includes(decodedText)) {
-        document.getElementById("status").innerText = "✅ Code is valid!";
-        alert(`Scanned QR YEP`);
-    } else {
-        document.getElementById("status").innerText = "❌ Code is not valid!";
-        alert(`Scanned QR NOPE`);
-        html5QrcodeScanner.clear(); // This stops the scanning session
-
-
-    }
+            if (codes.includes(decodedText)) {
+                document.getElementById("status").innerText = "✅ Code is valid!";
+                document.body.style.backgroundColor = "green";
+                html5QrCode.stop(); // Stop scanning
+            } else {
+                document.getElementById("status").innerText = "❌ Code is not valid!";
+                document.body.style.backgroundColor = "red";
+                html5QrCode.stop(); // Stop scanning
+            }
+        },
+        (error) => {
+            console.warn(`Scan error: ${error}`);
+        }
+    ).catch(err => {
+        console.error("Error starting QR scanner:", err);
+    });
 }
 
-function onScanFailure(error) {
-    console.warn(`Code scan error: ${error}`);
+// Stop the scanner
+function stopScanner() {
+    html5QrCode.stop().then(() => {
+        console.log("Scanner stopped");
+    }).catch(err => {
+        console.error("Error stopping QR scanner:", err);
+    });
 }
 
-// Initialize QR scanner
-const html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+// Example buttons to control the scanner
+document.getElementById("start-button").addEventListener("click", startScanner);
+document.getElementById("stop-button").addEventListener("click", stopScanner);

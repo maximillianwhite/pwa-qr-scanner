@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Validator B</title>
+    <title>QR Code Validator C</title>
     <!-- Link to the PWA manifest -->
     <link rel="manifest" href="manifest.json">
     <!-- Basic styles (optional) -->
@@ -21,12 +21,15 @@
     </style>
 </head>
 <body>
-    <h1>QR Code Validator</h1>
+    <h1>QR Code Validator B</h1>
+    <button id="start-button">Start Scanning</button>
     <div id="reader"></div>
-    <p>Scanned Code: <span id="result">None</span></p>
     <p>Status: <span id="status">Awaiting scan...</span></p>
+    <button id="stop-button">Stop Scanning</button>
+
     <!-- Link to the JavaScript file -->
     <script src="html5-qrcode.min.js"></script>
     <script src="app.js"></script>
+
 </body>
 </html>
