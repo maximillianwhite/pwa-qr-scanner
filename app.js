@@ -9,7 +9,6 @@ fetch("codes.json") // Replace with your URL if hosted externally
     });
 
 
-    console.log("Html5QrcodeScanner:", typeof Html5QrcodeScanner);
 
 
 
@@ -21,6 +20,7 @@ function onScanSuccess(decodedText) {
     // Validate the scanned code
     if (!decodedText || decodedText.trim() === "") {
         document.getElementById("status").innerText = "❌ Invalid QR code.";
+        alert(`Scanned QR Code: ${decodedText}`);
         return;
     }
 
