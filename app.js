@@ -22,11 +22,11 @@ function startScanner() {
 
             if (codes.includes(decodedText)) {
                 document.getElementById("status").innerText = "✅ Code is valid!";
-                document.body.style.backgroundColor = "green";
+                document.body.style.backgroundColor = "#C1E1C1";
                 html5QrCode.stop(); // Stop scanning
             } else {
                 document.getElementById("status").innerText = "❌ Code is not valid!";
-                document.body.style.backgroundColor = "red";
+                document.body.style.backgroundColor = "#FAA0A0";
                 html5QrCode.stop(); // Stop scanning
             }
         },

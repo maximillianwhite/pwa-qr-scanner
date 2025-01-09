@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Validator C</title>
+    
+    <title>QR Code Validator</title>
     <!-- Link to the PWA manifest -->
     <link rel="manifest" href="manifest.json">
-    <!-- Basic styles (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Basic styles -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,19 +17,56 @@
             margin: 20px;
         }
         #reader {
-            margin: 20px auto;
             width: 300px;
             height: 300px;
+            margin: 20px auto;
+            border: 5px solid #ddd; /* Light gray border */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            background-color: #f9f9f9; /* Light background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px; /* Placeholder font size */
+            color: #aaa; /* Placeholder text color */
         }
+        button {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 15px 20px; /* Padding for size */
+            font-size: 16px; /* Larger font */
+            border: none; /* Remove borders */
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Hover effects */
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+        button:active {
+            transform: scale(0.95); /* Button press effect */
+        }
+        button:disabled {
+            background-color: #ddd; /* Gray for disabled buttons */
+            color: #888;
+            cursor: not-allowed; /* Disabled cursor */
+        }
+
+
     </style>
 </head>
 <body>
-    <h1>QR Code Validator C</h1>
-    <button id="start-button">Start Scanning</button>
+    <h1>QR Code Validator D</h1>
+    <button id="start-button">
+        <i class="fas fa-play"></i> Start Scanning
+    </button>
     <div id="reader"></div>
     <p>Status: <span id="status">Awaiting scan...</span></p>
-    <button id="stop-button">Stop Scanning</button>
-
+    <button id="stop-button">
+        <i class="fas fa-stop"></i> Stop Scanner
+    </button>
     <!-- Link to the JavaScript file -->
     <script src="html5-qrcode.min.js"></script>
     <script src="app.js"></script>
