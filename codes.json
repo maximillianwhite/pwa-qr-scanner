@@ -1,6 +1,22 @@
 [
-    "CODE123",
-    "CODE456",
-    "CODE789",
-    "CODE999"
-]
+    {
+      "code": "CODE123",
+      "info": "GUEST",
+      "class": "G"
+    },
+    {
+      "code": "CODE555",
+      "info": "Mary Rose, Galderma",
+      "class": "S"
+    },
+    {
+      "code": "CODE789",
+      "info": "Other",
+      "class": "O"
+    },
+    {
+        "code": "CODE999",
+        "info": "GUEST",
+        "class": "G"
+    }
+  ]

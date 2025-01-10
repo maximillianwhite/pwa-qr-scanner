@@ -23,7 +23,11 @@
             border: 5px solid #ddd; /* Light gray border */
             border-radius: 10px; /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-            background-color: #f9f9f9; /* Light background */
+            /* background-color: #f9f9f9;  */
+            background-image: url("icon-512x512.png");
+            background-size: cover; /* Ensure the image covers the entire container */
+            background-position: center; /* Center the image within the container */
+    
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,7 +41,7 @@
             position: absolute; /* Align video properly within container */
         }
         button {
-            background-color: #4CAF50; /* Green background */
+            background-color: #3d4a54;
             color: white; /* White text */
             padding: 15px 20px; /* Padding for size */
             font-size: 16px; /* Larger font */
@@ -48,7 +52,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease; /* Hover effects */
         }
         button:hover {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #3d4a54;
             transform: scale(1.05); /* Slight zoom effect */
         }
         button:active {
@@ -64,7 +68,7 @@
     </style>
 </head>
 <body>
-    <h1>QR Code Validator E</h1>
+    <h1>TBT QR-Code Validator F</h1>
     <button id="start-button">
         <i class="fas fa-play"></i> Start Scanning
     </button>

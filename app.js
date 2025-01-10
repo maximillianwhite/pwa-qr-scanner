@@ -10,6 +10,52 @@ fetch("codes.json")
 
 const html5QrCode = new Html5Qrcode("reader");
 
+function onScanSuccess(decodedText) {
+
+  const resultElement = document.getElementById("result");
+  const statusElement = document.getElementById("status");
+
+  // Find the code in the JSON array
+  const matchedCode = codes.find(item => item.code === decodedText);
+
+  if (matchedCode) {
+    console.log("matchedCode:", typeof matchedCode.class);
+
+    // Display associated info
+    // resultElement.innerText = `Code: ${decodedText}`;
+    document.getElementById("status").innerText = `✅ Valid: ${matchedCode.info}`;
+
+    // Change background color based on class
+    switch (matchedCode.class) {
+      case "G":
+        document.body.style.backgroundColor = "#C1E1C1";
+        html5QrCode.stop();
+        break;
+      case "S":
+        document.body.style.backgroundColor = "#FFC300";
+        html5QrCode.stop();
+        break;
+      case "O":
+        document.body.style.backgroundColor = "A7C7E7";
+        html5QrCode.stop();
+        break;
+      default:
+        document.body.style.backgroundColor = "black";
+        html5QrCode.stop();
+    }
+  } else {
+    // Invalid code
+    document.body.style.backgroundColor = "#FAA0A0";
+
+    //resultElement.innerText = `Code: ${decodedText}`;
+    document.getElementById("status").innerText = "❌ Code is not valid!";
+    html5QrCode.stop(); // Stop scanning
+
+  }
+}
+
+
+
 // Start the scanner
 function startScanner() {
     document.body.style.backgroundColor = "white";
@@ -18,17 +64,18 @@ function startScanner() {
         { facingMode: "environment" }, // Rear camera if available
         { fps: 10, qrbox: 250 },
         (decodedText) => {
-            console.log("QR Code Scanned:", decodedText);
+            console.log("INITIAL SCAN:", decodedText);
 
-            if (codes.includes(decodedText)) {
-                document.getElementById("status").innerText = "✅ Code is valid!";
-                document.body.style.backgroundColor = "#C1E1C1";
-                html5QrCode.stop(); // Stop scanning
-            } else {
-                document.getElementById("status").innerText = "❌ Code is not valid!";
-                document.body.style.backgroundColor = "#FAA0A0";
-                html5QrCode.stop(); // Stop scanning
-            }
+            onScanSuccess(decodedText)
+            // if (codes.includes(decodedText)) {
+            //     document.getElementById("status").innerText = "✅ Code is valid!";
+            //     document.body.style.backgroundColor = "#C1E1C1";
+            //     html5QrCode.stop(); // Stop scanning
+            // } else {
+            //     document.getElementById("status").innerText = "❌ Code is not valid!";
+            //     document.body.style.backgroundColor = "#FAA0A0";
+            //     html5QrCode.stop(); // Stop scanning
+            // }
         },
         (error) => {
             console.warn(`Scan error: ${error}`);
@@ -48,6 +95,6 @@ function stopScanner() {
     });
 }
 
-// Example buttons to control the scanner
+// Buttons to control the scanner
 document.getElementById("start-button").addEventListener("click", startScanner);
 document.getElementById("stop-button").addEventListener("click", stopScanner);
