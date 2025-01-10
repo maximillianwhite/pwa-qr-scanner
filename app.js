@@ -40,6 +40,7 @@ function startScanner() {
 
 // Stop the scanner
 function stopScanner() {
+    document.body.style.backgroundColor = "white";
     html5QrCode.stop().then(() => {
         console.log("Scanner stopped");
     }).catch(err => {

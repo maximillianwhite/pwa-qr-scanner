@@ -30,6 +30,12 @@
             font-size: 18px; /* Placeholder font size */
             color: #aaa; /* Placeholder text color */
         }
+        #reader video {
+            width: 100%; /* Make the video fill the container */
+            height: 100%; /* Maintain aspect ratio */
+            object-fit: cover; /* Crop the video to fit perfectly */
+            position: absolute; /* Align video properly within container */
+        }
         button {
             background-color: #4CAF50; /* Green background */
             color: white; /* White text */
@@ -58,7 +64,7 @@
     </style>
 </head>
 <body>
-    <h1>QR Code Validator D</h1>
+    <h1>QR Code Validator E</h1>
     <button id="start-button">
         <i class="fas fa-play"></i> Start Scanning
     </button>
