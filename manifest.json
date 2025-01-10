@@ -1,6 +1,6 @@
 {
-    "name": "QR Code Validator",
-    "short_name": "QR Validator",
+    "name": "TBT QR-Scanner",
+    "short_name": "TBT QR-Scanner",
     "start_url": "index.html",
     "display": "standalone",
     "background_color": "#ffffff",
