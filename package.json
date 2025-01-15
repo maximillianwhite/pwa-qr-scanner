@@ -1,0 +1,24 @@
+{
+  "name": "pwa-qr-scanner",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maximillianwhite/pwa-qr-scanner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maximillianwhite/pwa-qr-scanner/issues"
+  },
+  "homepage": "https://github.com/maximillianwhite/pwa-qr-scanner#readme",
+  "description": "",
+  "dependencies": {
+    "better-sqlite3": "^11.7.2",
+    "googleapis": "^144.0.0"
+  }
+}

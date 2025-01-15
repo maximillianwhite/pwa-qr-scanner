@@ -1,64 +1,66 @@
 // Load the list of valid codes
-let codes = [];
-fetch("codes.json")
-    .then(response => response.json())
-    .then(data => codes = data)
-    .catch(error => {
-        console.error("Error loading codes:", error);
-        document.getElementById("status").innerText = "❌ Failed to load codes.";
-    });
+// let codes = [];
+// fetch("codes.json")
+//     .then(response => response.json())
+//     .then(data => codes = data)
+//     .catch(error => {
+//         console.error("Error loading codes:", error);
+//         document.getElementById("status").innerText = "❌ Failed to load codes.";
+//     });
 
 const html5QrCode = new Html5Qrcode("reader");
 
 function onScanSuccess(decodedText) {
+  html5QrCode.stop();
+  document.getElementById("status").innerText = "⏳ Waiting..."
 
-  const resultElement = document.getElementById("result");
-  const statusElement = document.getElementById("status");
-
-  // Find the code in the JSON array
-  const matchedCode = codes.find(item => item.code === decodedText);
-
-  if (matchedCode) {
-    console.log("matchedCode:", typeof matchedCode.class);
-
-    // Display associated info
-    // resultElement.innerText = `Code: ${decodedText}`;
-    document.getElementById("status").innerText = `✅ Valid: ${matchedCode.info}`;
-
-    // Change background color based on class
-    switch (matchedCode.class) {
-      case "G":
-        document.body.style.backgroundColor = "#C1E1C1";
-        html5QrCode.stop();
-        break;
-      case "S":
-        document.body.style.backgroundColor = "#FFC300";
-        html5QrCode.stop();
-        break;
-      case "O":
-        document.body.style.backgroundColor = "A7C7E7";
-        html5QrCode.stop();
-        break;
-      default:
-        document.body.style.backgroundColor = "black";
-        html5QrCode.stop();
-    }
-  } else {
-    // Invalid code
-    document.body.style.backgroundColor = "#FAA0A0";
-
-    //resultElement.innerText = `Code: ${decodedText}`;
-    document.getElementById("status").innerText = "❌ Code is not valid!";
-    html5QrCode.stop(); // Stop scanning
-
-  }
+  // Replace 'your-webhook-id' with your actual Make webhook URL
+  fetch("https://hook.eu2.make.com/ytl5sarw52y1dcq7mx9oilz6xj3a8snp", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ code: decodedText }) // Send the scanned QR code
+  })
+      .then(response => response.json())
+      .then(data => {
+          const statusElement = document.getElementById("status");
+          if (data.isValid) {
+              // Valid code
+              statusElement.innerText = `✅ Valid: ${data.info}`;
+              switch (data.class) {
+                  case "G":
+                      document.body.style.backgroundColor = "#C1E1C1";
+                      break;
+                  case "S":
+                      document.body.style.backgroundColor = "#FFC300";
+                      break;
+                  case "O":
+                      document.body.style.backgroundColor = "#A7C7E7";
+                      break;
+                  default:
+                      document.body.style.backgroundColor = "black";
+              }
+          } else {
+              // Invalid code
+              statusElement.innerText = "❌ Code is not valid!";
+              document.body.style.backgroundColor = "#FAA0A0";
+          }
+          //html5QrCode.stop(); // Stop the scanner after processing
+      })
+      .catch(error => {
+          console.error("Error communicating with webhook:", error);
+          document.getElementById("status").innerText = "❌ Error processing the code.";
+      });
 }
+
 
 
 
 // Start the scanner
 function startScanner() {
     document.body.style.backgroundColor = "white";
+    document.getElementById("status").innerText = "🚀 Ready to scan!"
 
     html5QrCode.start(
         { facingMode: "environment" }, // Rear camera if available
