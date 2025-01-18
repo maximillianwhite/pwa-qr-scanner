@@ -25,6 +25,8 @@ function onScanSuccess(decodedText) {
       .then(response => response.json())
       .then(data => {
           const statusElement = document.getElementById("status");
+          const decodedElement = document.getElementById("decoded");
+          decodedElement.innerText = `${decodedText}`;
           if (data.isValid) {
               // Valid code
               statusElement.innerText = `✅ Valid: ${data.info}`;
@@ -33,13 +35,16 @@ function onScanSuccess(decodedText) {
                       document.body.style.backgroundColor = "#C1E1C1";
                       break;
                   case "S":
-                      document.body.style.backgroundColor = "#FFC300";
+                      document.body.style.backgroundColor = "#FFE599";
                       break;
-                  case "O":
+                  case "E":
                       document.body.style.backgroundColor = "#A7C7E7";
                       break;
+                  case "T":
+                        document.body.style.backgroundColor = "#8E7CC3";
+                        break;
                   default:
-                      document.body.style.backgroundColor = "black";
+                      document.body.style.backgroundColor = "grey";
               }
           } else {
               // Invalid code

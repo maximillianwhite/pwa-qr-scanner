@@ -44,6 +44,7 @@
             background-color: #3d4a54;
             color: white; /* White text */
             padding: 15px 20px; /* Padding for size */
+            margin: 10px;
             font-size: 16px; /* Larger font */
             border: none; /* Remove borders */
             border-radius: 8px; /* Rounded corners */
@@ -63,17 +64,25 @@
             color: #888;
             cursor: not-allowed; /* Disabled cursor */
         }
+        #notes {
+            text-align: left;
+        }
 
 
     </style>
 </head>
 <body>
-    <h1>TBT QR-Code Validator F</h1>
+    <h1>TBT QR-Code Validator G</h1>
+    
+    <div id="reader"></div>
+    <p>Status: <span id="status">Awaiting scan...</span></p>
+    <p>Code: <span id="decoded">Awaiting scan...</span></p>
+    
+    <p id="notes">🟥 - Invalid <br> 🟩 - Guest <br> 🟨 - Speaker <br> 🟦 - Exhibitor <br> 🟪 - TBT Staff</p>
     <button id="start-button">
         <i class="fas fa-play"></i> Start Scanning
     </button>
-    <div id="reader"></div>
-    <p>Status: <span id="status">Awaiting scan...</span></p>
+    <br>
     <button id="stop-button">
         <i class="fas fa-stop"></i> Stop Scanner
     </button>
