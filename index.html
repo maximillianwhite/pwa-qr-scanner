@@ -64,8 +64,61 @@
             color: #888;
             cursor: not-allowed; /* Disabled cursor */
         }
-        #notes {
-            text-align: left;
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between elements */
+        }
+
+        .toggle-container .label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(251, 213, 76);
+            border-radius: 24px;
+            transition: 0.4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        input:checked + .slider {
+            background-color: rgb(150, 61, 170);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
 
 
@@ -77,8 +130,16 @@
     <div id="reader"></div>
     <p>Status: <span id="status">Awaiting scan...</span></p>
     <p>Code: <span id="decoded">Awaiting scan...</span></p>
+    <div class="toggle-container">
+        <span class="label">AM</span>
+        <label class="toggle-switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <span class="label">PM</span><span id="AMPM" class="label">...</span>
+      </div>
+    <br>
     
-    <p id="notes">🟥 - Invalid <br> 🟩 - Guest <br> 🟨 - Speaker <br> 🟦 - Exhibitor <br> 🟪 - TBT Staff</p>
     <button id="start-button">
         <i class="fas fa-play"></i> Start Scanning
     </button>
