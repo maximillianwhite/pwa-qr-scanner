@@ -15,7 +15,20 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
+            background-color: white;
+
+            
         }
+        body.white-class {
+        background-image: repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.05),
+            rgba(0, 0, 0, 0.05) 10px,
+            rgba(255, 255, 255, 0.05) 10px,
+            rgba(255, 255, 255, 0.05) 20px
+        );
+        }
+
         #reader {
             width: 300px;
             height: 300px;
@@ -96,7 +109,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgb(251, 213, 76);
+            background-color: rgb(37, 184, 217);
             border-radius: 24px;
             transition: 0.4s;
         }
@@ -114,7 +127,7 @@
         }
 
         input:checked + .slider {
-            background-color: rgb(150, 61, 170);
+            background-color: rgb(27, 104, 15);
         }
 
         input:checked + .slider:before {
@@ -124,8 +137,8 @@
 
     </style>
 </head>
-<body>
-    <h1>TBT QR-Code Validator G</h1>
+<body class="white-class">
+    <h1>TBT QR-Code Validator H</h1>
     
     <div id="reader"></div>
     <p>Status: <span id="status">Awaiting scan...</span></p>

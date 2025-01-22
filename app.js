@@ -19,33 +19,47 @@ function onScanSuccess(decodedText) {
           const toggleValue = document.querySelector(".toggle-switch input").checked ? "P" : "A"; // Determine the toggle state
           const firstLetter = decodedText.charAt(0);
           if (data.isValid) {
-              
+            document.body.classList.remove("white-class");
               switch (data.class) {
                   case "G":
-                      document.body.style.backgroundColor = "#C1E1C1";
-                      statusElement.innerText = `✅ 🟩 - Guest: ${data.info}`;
+                      if (decodedText.startsWith("AM")) {
+                        document.body.style.backgroundColor = "#87CEEB";
+                        statusElement.innerText = `✅ 🟦 - AM Guest: ${data.info}`;
+                      } else if(decodedText.startsWith("PM")) {
+                        document.body.style.backgroundColor = "#008000";
+                        statusElement.innerText = `✅ 🟩 - PM Guest: ${data.info}`;
+                      } 
+
+                      if (firstLetter == toggleValue){
+                        document.getElementById("AMPM").innerText = "✅"
+                      } else {
+                        document.getElementById("AMPM").innerText = "❌❌❌"
+                      }
+
                       break;
                   case "S":
-                      document.body.style.backgroundColor = "#FFE599";
-                      statusElement.innerText = `✅ 🟨 - Speaker: ${data.info}`;
+                      document.body.style.backgroundColor = "#white";
+                      statusElement.innerText = `✅ 🤍 - Speaker/Moderator: ${data.info}`;
+                      document.getElementById("AMPM").innerText = "..."
+
                       break;
                   case "E":
-                      document.body.style.backgroundColor = "#A7C7E7";
-                      statusElement.innerText = `✅ 🟦 - Exhibitor: ${data.info}`;
+                      document.body.style.backgroundColor = "#898989";
+                      statusElement.innerText = `✅ 🩶 - Exhibitor/Brand Rep: ${data.info}`;
+                      document.getElementById("AMPM").innerText = "..."
+
                       break;
                   case "T":
-                      document.body.style.backgroundColor = "#8E7CC3";
-                      statusElement.innerText = `✅ 🟪 - TBT Staff: ${data.info}`;
+                      document.body.style.backgroundColor = "#ffc300";
+                      statusElement.innerText = `✅ 💛 - TBT/180 Staff: ${data.info}`;
+                      document.getElementById("AMPM").innerText = "..."
+
                       break;
                   default:
                       document.body.style.backgroundColor = "grey";
               }
 
-              if (firstLetter == toggleValue){
-                document.getElementById("AMPM").innerText = "✅"
-              } else {
-                document.getElementById("AMPM").innerText = "❌❌❌"
-              }
+              
           } else {
               // Invalid code
               statusElement.innerText = "❌ Code is not valid!";
@@ -65,8 +79,9 @@ function onScanSuccess(decodedText) {
 // Start the scanner
 function startScanner() {
     document.body.style.backgroundColor = "white";
+    document.body.className = "white-class";
     document.getElementById("status").innerText = "🚀 Ready to scan!"
-    document.getElementById("decoded").innerText = "Awaiting Scan..."
+    document.getElementById("decoded").innerText = "Awaiting scan..."
     document.getElementById("AMPM").innerText = "..."
 
 
@@ -98,7 +113,8 @@ function startScanner() {
 // Stop the scanner
 function stopScanner() {
     document.body.style.backgroundColor = "white";
-    document.getElementById("decoded").innerText = "Awaiting Scan..."
+    document.getElementById("decoded").innerText = "Awaiting scan..."
+    document.getElementById("status").innerText = "Awaiting scan..."
     document.getElementById("AMPM").innerText = "..."
     html5QrCode.stop().then(() => {
         console.log("Scanner stopped");
